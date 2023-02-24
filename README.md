@@ -5,7 +5,7 @@ http://localhost:8888/notebooks/66%20CausalMap/Panasonic-IDS/notebooks/EDA.ipynb
 * De-duplication
 * Fix sentence tokenization
 
-#### 2. Parse
+#### 2. Parse/Extract Relations
 Go to `/home/fiona/79 Mass`, run `mass_panasonic.py`
 
 #### 3. Post-process
