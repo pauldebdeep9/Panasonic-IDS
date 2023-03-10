@@ -1,3 +1,4 @@
 notebooks/.ipynb_checkpoints/
 data/MIR.csv
 data/MIR_old.csv
+*__pycache__*
