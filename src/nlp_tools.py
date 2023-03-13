@@ -142,8 +142,61 @@ def combine_causenet_args(ddict, tokens):
     return updated_ddict
 
 
-def get_text_w_pairs(text,cause,effect):
+def find_substring_in_text(text, substring):
+    # remove all spaces
+    substring = re.sub(' ','',substring)    
+    # insert optional spaces
+    new_substring = ''
+    for i in substring:
+        # remember to escape chars like () \ etc.
+        new_substring+=re.escape(i)+'\s*'
+    
+    search = re.search(new_substring,text)
+    
+    if search is None:
+        raise ValueError(f"{text}\n{substring}")
+    
+    return search.start(), search.end()
+
+
+def get_text_w_pairs(text,cause,effect,allow_overlap=False):
+
+    cause_start, cause_end = find_substring_in_text(text, cause)
+    effect_start, effect_end = find_substring_in_text(text, effect)
+    
     text_w_pairs = text
-    text_w_pairs = re.sub(re.escape(cause),f"<ARG0>{cause}</ARG0>",text_w_pairs)
-    text_w_pairs = re.sub(re.escape(effect),f"<ARG1>{effect}</ARG1>",text_w_pairs)
+    if cause_start<effect_start: 
+        if effect_start<cause_end:    # <ARG0><ARG1></ARG0>
+            if not allow_overlap:
+                return None
+            effect_start+=6
+        else:                         # <ARG0></ARG0><ARG1>
+            effect_start+=6+7
+        if effect_end<cause_end:      # <ARG0></ARG1></ARG0>
+            if not allow_overlap:
+                return None
+            effect_end+=6
+        else:                         # <ARG0></ARG0></ARG1>
+            effect_end+=6+7
+        text_w_pairs = text_w_pairs[:cause_start] + '<ARG0>' + text_w_pairs[cause_start:cause_end] + '</ARG0>'+ text_w_pairs[cause_end:]
+        text_w_pairs = text_w_pairs[:effect_start] + '<ARG1>' + text_w_pairs[effect_start:effect_end] + '</ARG1>'+ text_w_pairs[effect_end:]
+    else:
+        if cause_start<effect_end:    # <ARG1><ARG0></ARG1>
+            if not allow_overlap:
+                return None
+            cause_start+=6
+        else:                         # <ARG1></ARG1><ARG0>
+            cause_start+=6+7
+        if cause_end<effect_end:      # <ARG1></ARG0></ARG1>
+            if not allow_overlap:
+                return None
+            cause_end+=6
+        else:                         # <ARG1></ARG1></ARG0>
+            cause_end+=6+7
+        text_w_pairs = text_w_pairs[:effect_start] + '<ARG1>' + text_w_pairs[effect_start:effect_end] + '</ARG1>'+ text_w_pairs[effect_end:]
+        text_w_pairs = text_w_pairs[:cause_start] + '<ARG0>' + text_w_pairs[cause_start:cause_end] + '</ARG0>'+ text_w_pairs[cause_end:]
+        
+    if ('<ARG0>' not in text_w_pairs) or ('<ARG1>' not in text_w_pairs):
+        raise ValueError(f'Cause/Effect Arg not found: \n{text_w_pairs}')
+    
     return text_w_pairs

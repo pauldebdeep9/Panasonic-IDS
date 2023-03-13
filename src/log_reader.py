@@ -113,7 +113,7 @@ class LogReader(object):
             if int(line[0])==1: # causal
                 text = join_neighbouring_args(line[1])
                 text = pick_longer_args(text)
-                text = re.sub(' ##','',text)
+                text = re.sub('##','',text)
                 causes = re.findall(r'<ARG0>(.*?)</ARG0>', text)
                 effects = re.findall(r'<ARG1>(.*?)</ARG1>', text)
                 
@@ -124,15 +124,15 @@ class LogReader(object):
                         relations.append([cause,effect])
                 
                 # insert joined options
-                all_args = causes+effects
                 if len(causes)>1 or len(effects)>1:
-                    all_args+=[re.sub('</ARG0>|<ARG1>','',x) for x in re.findall(r'<ARG0>(.*?)</ARG1>', text)]
-                    all_args+=[re.sub('</ARG1>|<ARG0>','',x) for x in re.findall(r'<ARG1>(.*?)</ARG0>', text)]
+                    causes+=[''.join(l) for l in re.findall(r'<ARG0>(.*?)</ARG0>(.*?)<ARG1>(.*?)</ARG1>(.*?)<ARG0>(.*?)</ARG0>', text)]
+                    effects+=[''.join(l) for l in re.findall(r'<ARG1>(.*?)</ARG1>(.*?)<ARG0>(.*?)</ARG0>(.*?)<ARG1>(.*?)</ARG1>', text)]
 
                 self.infos[doc_id][sent_id]['unicausal'] = {
                     'n_rels': len(relations),
                     'rels': relations,
-                    'args': all_args
+                    'causes': causes,
+                    'effects': effects
                 }
             else: # non-causal
                 if self.additional_pair_clf:

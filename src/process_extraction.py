@@ -17,6 +17,7 @@ def main(csv_file_path, folder):
     print('Processing...')
     f_infos = {}
     file_paths = [os.path.join(folder, f) for f in os.listdir(folder) if os.path.isfile(os.path.join(folder, f))]
+    # file_paths = [r"D:\79 Mass\outs\MIR\MIR-540_554.log"]
     for log_file_path in tqdm(file_paths):
         s,e = log_file_path.split("MIR-")[-1].split(".log")[0].split("_")
         reader = LogReader(

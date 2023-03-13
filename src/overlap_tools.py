@@ -4,6 +4,7 @@ import itertools
 
 
 def insert_into_finfos(f_infos, keys, values):
+    keys = (keys[0].lower(), keys[1].lower())
     if keys not in f_infos.keys():
         f_infos[keys] = [values]
     else:
@@ -101,33 +102,40 @@ def retain_intersection(reader, f_infos:dict={}, doc_id_start:int=0,
                     if additional_pair_clf:
                         text = reader.sentences[reader.ids2counter[(doc_id,sent_id)]]
                         sentences = []
-                        arguments = []
-                        for span in unicausal_dict['args']:
+                        causes = []
+                        effects = []
+                        for span in unicausal_dict['causes']:
+                            if len(span)<=1: # one-letter words 'a','i',etc. are ignored
+                                continue
                             if 'NN' in get_pos_tags(span):
-                                arguments.append(span)
-                        pairs1 = list(itertools.combinations(arguments, 2))
-                        pairs2 = [(two,one) for one,two in pairs1]
-                        arg_pairs = pairs1+pairs2
-
-                        for cause_span, effect_span in arg_pairs:
-                            text_w_pairs = get_text_w_pairs(text, cause_span, effect_span)
-                            sentences.append(text_w_pairs)
+                                causes.append(span)
+                        for span in unicausal_dict['effects']:
+                            if len(span)<=1:
+                                continue
+                            if 'NN' in get_pos_tags(span):
+                                effects.append(span)
+                        arg_pairs = []
+                        for cause_span in causes:
+                            for effect_span in effects:
+                                text_w_pairs = get_text_w_pairs(text, cause_span, effect_span, allow_overlap=False)
+                                if text_w_pairs is not None:
+                                    arg_pairs.append((cause_span,effect_span))
+                                    sentences.append(text_w_pairs)
                         ce_cls = get_ce_pair_cls(model, tokenizer, sentences)
 
                         for i, pred in enumerate(ce_cls):
                             if int(pred)==1:
-                                if ('<ARG0>' in sentences[i]) and ('<ARG1>' in sentences[i]):
-                                    cause_span, effect_span = arg_pairs[i]
-                                    e_dict = {
-                                        'text': text,
-                                        'cause_span': cause_span,
-                                        'effect_span': effect_span,
-                                        'doc_id': int(doc_id)+int(doc_id_start),
-                                        'sent_id': sent_id,
-                                        'method': ['unicausalm'],
-                                        'causenet_patterns': None
-                                    }
-                                    f_infos = insert_into_finfos(f_infos, keys=(cause_span,effect_span), values=e_dict)
+                                cause_span, effect_span = arg_pairs[i]
+                                e_dict = {
+                                    'text': text,
+                                    'cause_span': cause_span,
+                                    'effect_span': effect_span,
+                                    'doc_id': int(doc_id)+int(doc_id_start),
+                                    'sent_id': sent_id,
+                                    'method': ['unicausalm'],
+                                    'causenet_patterns': None
+                                }
+                                f_infos = insert_into_finfos(f_infos, keys=(cause_span,effect_span), values=e_dict)
             
             if unicausalp_dict is not None:
                 cause_span, effect_span = unicausalp_dict['rels'][0]
