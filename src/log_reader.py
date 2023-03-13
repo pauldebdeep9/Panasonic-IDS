@@ -6,10 +6,13 @@ from copy import copy
 import nltk
 from nltk.tokenize import sent_tokenize
 from nlp_tools import join_neighbouring_args, pick_longer_args, combine_causenet_args
+from torch_deps import get_ce_pair_cls
 
 
 class LogReader(object):
-    def __init__(self, log_file_path, csv_file_path, causenet_simplify=False):
+    def __init__(self, log_file_path, csv_file_path, 
+                 model, tokenizer, additional_pair_clf=True, 
+                 causenet_simplify=False):
         self.doc_id_start, self.doc_id_end = log_file_path.split("MIR-")[-1].split(".log")[0].split("_")
         self.doc_id_start, self.doc_id_end = int(self.doc_id_start), int(self.doc_id_end)
         self.segments = {}
@@ -28,6 +31,9 @@ class LogReader(object):
         
         self.counter2ids = {}
         self.ids2counter = {}
+        self.additional_pair_clf = additional_pair_clf
+        self.model = model
+        self.tokenizer = tokenizer
         self.parse_unicausal()
         
         self.causenet_simplify = causenet_simplify
@@ -87,7 +93,7 @@ class LogReader(object):
     def parse_unicausal(self):
         doc_id = 0
         doc_last_sent_id = self.sent_counts[doc_id] 
-        template = {'unicausal': None, 'causenet': None}
+        template = {'unicausal': None, 'causenet': None, 'unicausal+':None}
         
         for counter, line in enumerate(self.segments['Retrieving Causal tags...'][1:]):
             if counter>=doc_last_sent_id:
@@ -111,14 +117,37 @@ class LogReader(object):
                 causes = re.findall(r'<ARG0>(.*?)</ARG0>', text)
                 effects = re.findall(r'<ARG1>(.*?)</ARG1>', text)
                 
+                # get all possible combinations
                 relations = []
-                for i in range(min(len(causes), len(effects))):
-                    relations.append([causes[i],effects[i]])
+                for cause in causes:
+                    for effect in effects:
+                        relations.append([cause,effect])
+                
+                # insert joined options
+                all_args = causes+effects
+                if len(causes)>1 or len(effects)>1:
+                    all_args+=[re.sub('</ARG0>|<ARG1>','',x) for x in re.findall(r'<ARG0>(.*?)</ARG1>', text)]
+                    all_args+=[re.sub('</ARG1>|<ARG0>','',x) for x in re.findall(r'<ARG1>(.*?)</ARG0>', text)]
 
                 self.infos[doc_id][sent_id]['unicausal'] = {
                     'n_rels': len(relations),
-                    'rels': relations
+                    'rels': relations,
+                    'args': all_args
                 }
+            else: # non-causal
+                if self.additional_pair_clf:
+                    # extract the "clean" examples, verify through Pair Classification
+                    text = re.sub(' ##','',line[1])
+                    causes = re.findall(r'<ARG0>(.*?)</ARG0>', text)
+                    effects = re.findall(r'<ARG1>(.*?)</ARG1>', text)
+                    if len(causes)==1 and len(effects)==1:
+                        ce_cls = get_ce_pair_cls(self.model,self.tokenizer,[line[1]])[0]
+                        if int(ce_cls)==1:
+                            self.infos[doc_id][sent_id]['unicausal+'] = {
+                                'n_rels': 1,
+                                'rels': [[causes[0],effects[0]]]
+                            }
+
         self.ids2counter = {v:k for k,v in self.counter2ids.items()}
         
     

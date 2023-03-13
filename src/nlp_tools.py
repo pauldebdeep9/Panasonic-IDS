@@ -1,4 +1,10 @@
 import re
+import nltk
+
+
+def get_pos_tags(text):
+    text = nltk.word_tokenize(text)
+    return [pos for word,pos in nltk.pos_tag(text)]
 
 
 def join_neighbouring_args(text):
@@ -134,3 +140,10 @@ def combine_causenet_args(ddict, tokens):
     updated_ddict['n_rels'] = len(updated_ddict['patterns'])
     
     return updated_ddict
+
+
+def get_text_w_pairs(text,cause,effect):
+    text_w_pairs = text
+    text_w_pairs = re.sub(re.escape(cause),f"<ARG0>{cause}</ARG0>",text_w_pairs)
+    text_w_pairs = re.sub(re.escape(effect),f"<ARG1>{effect}</ARG1>",text_w_pairs)
+    return text_w_pairs

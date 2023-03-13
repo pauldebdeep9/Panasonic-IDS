@@ -4,19 +4,34 @@ from tqdm import tqdm
 from log_reader import LogReader
 from overlap_tools import retain_intersection
 from report_tools import report_counts, report_intersection
+from torch_deps import get_ce_pair_model
 import pickle
 from pathlib import Path
 
 
 def main(csv_file_path, folder):
+    # Load Dependencies
+    model, tokenizer = get_ce_pair_model()
+
     # Process
     print('Processing...')
     f_infos = {}
     file_paths = [os.path.join(folder, f) for f in os.listdir(folder) if os.path.isfile(os.path.join(folder, f))]
     for log_file_path in tqdm(file_paths):
         s,e = log_file_path.split("MIR-")[-1].split(".log")[0].split("_")
-        reader = LogReader(log_file_path, csv_file_path, causenet_simplify=True)
-        retain_intersection(reader, f_infos, s)
+        reader = LogReader(
+            log_file_path, csv_file_path, 
+            model, tokenizer,
+            additional_pair_clf=True, # checks non-causal with pair clf
+            causenet_simplify=True
+            )
+        retain_intersection(
+            reader, f_infos, 
+            doc_id_start=s, 
+            model=model, 
+            tokenizer=tokenizer,
+            additional_pair_clf=True
+            )
     
     # Reporting
     report_counts(f_infos)

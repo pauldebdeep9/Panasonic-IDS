@@ -9,20 +9,27 @@ def report_counts(f_infos):
 
 def report_intersection(f_infos):
     unicausal_count  = 0
+    unicausalpm_count = 0
     causenet_count = 0
     overlap_count = 0
+    total = 0
     for k,v in f_infos.items():
         for vv in v:
             if len(vv['method'])==2:
                 unicausal_count += 1
                 causenet_count += 1
                 overlap_count += 1
+                total+=2
             else:
                 if 'unicausal' in vv['method']:
                     unicausal_count += 1
+                elif ('unicausal+' in vv['method']) or ('unicausalm' in vv['method']):
+                    unicausalpm_count += 1
                 elif 'causenet' in vv['method']:
                     causenet_count += 1
                 else:
                     raise ValueError('There cannot be a relation without any method support!')
-    print(f'UniCausal: {unicausal_count}, CauseNet: {causenet_count}')
-    print(f'Both: {overlap_count}, Total: {unicausal_count+causenet_count-overlap_count}')
+                total+=1
+    print(f'UniCausal: {unicausal_count}, UniCausalPM: {unicausalpm_count}, CauseNet: {causenet_count}')
+    print(f'Intersection: {overlap_count}, Union: {unicausal_count+causenet_count-overlap_count}')
+    print(f'Total Evidence Counts: {total}')
