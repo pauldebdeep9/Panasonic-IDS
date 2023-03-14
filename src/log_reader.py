@@ -65,6 +65,7 @@ class LogReader(object):
     def parse_sentences(self, csv_file_path):
         text_col = pd.read_csv(csv_file_path)['Translated'].iloc[self.doc_id_start:self.doc_id_end+1]
         for text in text_col:
+            text = re.sub('\u200b','',text)
             sents = sent_tokenize(text)
             self.sent_counts.append(len(sents))
             self.sentences.extend(sents)
@@ -114,6 +115,7 @@ class LogReader(object):
                 text = join_neighbouring_args(line[1])
                 text = pick_longer_args(text)
                 text = re.sub('##','',text)
+                text = re.sub('\u200b','',text)
                 causes = re.findall(r'<ARG0>(.*?)</ARG0>', text)
                 effects = re.findall(r'<ARG1>(.*?)</ARG1>', text)
                 
@@ -137,7 +139,8 @@ class LogReader(object):
             else: # non-causal
                 if self.additional_pair_clf:
                     # extract the "clean" examples, verify through Pair Classification
-                    text = re.sub(' ##','',line[1])
+                    text = re.sub('##','',line[1])
+                    text = re.sub('\u200b','',text)
                     causes = re.findall(r'<ARG0>(.*?)</ARG0>', text)
                     effects = re.findall(r'<ARG1>(.*?)</ARG1>', text)
                     if len(causes)==1 and len(effects)==1:

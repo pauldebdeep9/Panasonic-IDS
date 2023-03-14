@@ -143,6 +143,8 @@ def combine_causenet_args(ddict, tokens):
 
 
 def find_substring_in_text(text, substring):
+    # replace [UNK] with specials
+    substring = re.sub('\[UNK\]','\u200b',substring)
     # remove all spaces
     substring = re.sub(' ','',substring)    
     # insert optional spaces
@@ -150,7 +152,7 @@ def find_substring_in_text(text, substring):
     for i in substring:
         # remember to escape chars like () \ etc.
         new_substring+=re.escape(i)+'\s*'
-    
+    new_substring = re.sub('\u200b','.*',new_substring)
     search = re.search(new_substring,text)
     
     if search is None:

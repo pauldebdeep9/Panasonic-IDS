@@ -82,6 +82,8 @@ def retain_intersection(reader, f_infos:dict={}, doc_id_start:int=0,
                 causenet_dict['patterns'] = [r for i,r in enumerate(causenet_dict['patterns']) if i not in remove_ids]
             
             # Handling causal relations identified by EITHER
+
+            # TO DO: remove token spacing in CE for UniCausal
             if unicausal_dict is not None:
                 if len(unicausal_dict['rels'])==1:
                     # Only keep examples that have ONE causal relation
