@@ -27,3 +27,16 @@ python cluster_nodes.py
 ```
 
 #### 5. Display Graph
+
+
+
+#### Test Set
+Get Annotations
+1. http://localhost:8888/notebooks/66%20CausalMap/Panasonic-IDS/notebooks/Format%20Annotated%20Data.ipynb
+2. Fix annotations in CSV
+3. http://localhost:8888/notebooks/66%20CausalMap/Panasonic-IDS/notebooks/Format%20Annotated%20Data.ipynb
+Get Predictions
+4. http://localhost:8888/notebooks/66%20CausalMap/Panasonic-IDS/notebooks/Evaluate%20Extraction.ipynb
+Evaluate Extraction, Store Results
+5. http://localhost:8888/notebooks/66%20CausalMap/Panasonic-IDS/notebooks/EDA_nerevaluate.ipynb
+6. "D:\66 CausalMap\Paper\paper_tables.xlsx"

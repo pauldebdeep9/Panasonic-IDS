@@ -1,0 +1,99 @@
+﻿span,ce_label,index,topic- Jeffery ,topic- Debdeep
+to make inroads in the Indian market,cause,MIR_51_1_0,increase market,Increased competition
+"From to Uber and , many foreign companies have had to launch low-price versions of their products",effect,MIR_51_1_0,lower price,Price reduction
+"there's price parity with its internal combustion engine (ICE) equivalent. """,cause,MIR_51_3_0,lower price,Cost reduction
+Foreign or local electric cars (EVs) will grow in India,effect,MIR_51_3_0,increase production,Increased demand
+"""Given these conditions",cause,MIR_51_6_0,lower price,Competition
+local as well as foreign players may hesitate to expand in the Indian market,effect,MIR_51_6_0,increase market,Supply reduction
+they aren’t purely electric,cause,MIR_78_0_0,no electric car,Hybrid
+"Toyota in India has largely pivoted toward hybrid vehicles, which attract taxes of as much as 43%",effect,MIR_78_0_0,higher tax and duty,Taxation
+The government keeps taxes on cars and motorbikes so high,cause,MIR_78_2_0,higher tax and duty,Taxation
+companies find it hard to build scale,effect,MIR_78_2_0,difficult to expand ,Supply reduction
+import duties would,cause,MIR_78_8_0,higher tax and duty,Taxation
+his vehicles unaffordable in India.,effect,MIR_78_8_0,higher price,Supply reduction
+marks a shift away from the current policy that incentivises both hybrid vehicles - which combine fossil fuel and electric power - and electric cars,cause,MIR_94_1_0,higher price,Hybrid
+", and is worrying some automakers.",effect,MIR_94_1_0,increase concern for car manufacturer,Uncertainly
+to bring down their cost and having favorable tariff structures for charging cars,cause,MIR_94_6_0,lower price,Incentives
+"bulk procurement of electric vehicles, building standardized, swappable batteries for two- and three-wheelers",effect,MIR_94_6_0,higher sales,Cost reduction
+to bring them to cost parity with conventional models by 2025.,cause,MIR_94_7_0,lower price,Cost reduction
+"setting up battery swapping stations by 2018, common manufacturing facilities for components and increasing subsidies on all battery electric vehicles",effect,MIR_94_7_0,higher incentive,improved infrastructure
+parts are delivered to factories right as they are required,cause,MIR_143_1_0,better time management,Low delivery time
+minimizing the need to stockpile them,effect,MIR_143_1_0,lower cost,risk mitigation
+"From fashion to food processing to pharmaceuticals, companies have embraced Just In Time to stay nimble",cause,MIR_143_3_0,better time management,process improvement
+"allowing them to adapt to changing market demands, while cutting costs",effect,MIR_143_3_0,lower cost,innovation
+"to stay nimble, allowing them to adapt to changing market demands",cause,MIR_143_3_1,changing market demand,Strategy
+"From fashion to food processing to pharmaceuticals, companies have embraced Just In Time",effect,MIR_143_3_1,better time management,process improvement
+", while reinvigorating concerns that some industries have gone too far",cause,MIR_143_4_0,increase concern for car manufacturer, Business hurdles
+", leaving them vulnerable to disruption.",effect,MIR_143_4_0,increase velnarability,risk
+As the pandemic has hampered factory operations and sown chaos in global shipping,cause,MIR_143_5_0,increase pandemic,transportation disruption
+many economies around the world have been bedeviled by shortages of a vast range of goods — from electronics to lumber to clothing,effect,MIR_143_5_0,increase shortage of supply,raw material shortage
+sanctions imposed over the invasion of Ukraine battered the ruble and many global auto companies joined a boycott of the country,cause,MIR_328_0_0,increase conflict,global politics
+leaving buyers confronting sparse showrooms,effect,MIR_328_0_0,decrease sales,long delay
+"sanctions imposed over the invasion of Ukraine battered the ruble and many global auto companies joined a boycott of the country, leaving buyers confronting sparse showrooms",cause,MIR_328_0_1,increase conflict,global politics
+Russian vehicle sales plunged by 63 percent in March,effect,MIR_328_0_1,decrease sales,sales decrese
+Wednesday’s vote will determine,cause,MIR_387_2_0,increase green technology,policymaking
+how fast companies will have to transition production and when they will have to stop selling combustion engine vehicles,effect,MIR_387_2_0,decrease sales,adoption
+A narrow majority,cause,MIR_387_5_0,low support,disintegration
+it may be difficult for the ENVI committee to adopt the ambitious 70% proposal.,effect,MIR_387_5_0,increase difficulty,low adoption
+"to start producing 150,000 passenger cars per year from 2024.",cause,MIR_455_3_0,increase green technology,supply increase
+it would set up a facility in Thailand,effect,MIR_455_3_0,increase investment,expansion
+to produce EVs,cause,MIR_455_6_0,increase green technology,green energy adoption
+The 17.9 billion baht ($491.49 million) project,effect,MIR_455_6_0,increase investment,expansion
+to attract EV makers and stimulate demand.,cause,MIR_455_12_0,increase green technology,policymaking
+and has recently offered incentives including tax breaks and subsidies,effect,MIR_455_12_0,higher incentive,Cost reduction
+rising costs and travel restrictions back home,cause,MIR_455_13_0,higher cost,transportation disruption
+Investment interest in Thailand from Chinese auto and consumer goods companies has increased,effect,MIR_455_13_0,increase investment,cost increase
+to improve road safety.,cause,MIR_553_0_0,improve road safety,Compliance
+"Union minister Nitin Gadkari on Tuesday in New Delhi said that efforts are being made to improve road engineering, automobile manufacturing, and emergency services, and the cooperation of all stakeholders is necessary",effect,MIR_553_0_0,increase advance technology,Infrastructure
+to improve the quality of roads and reduce accidents,cause,MIR_553_1_0,decrease accidence,improve safety
+The government is also planning to conduct a road safety audit,effect,MIR_553_1_0,improve road safety,audit
+to improve the safety of people on the road,cause,MIR_553_3_0,improve road safety,improve safety
+the education and cooperation of people are very important and various initiatives through campaigns and advertisements are being taken,effect,MIR_553_3_0,higher education,awareness
+"""That day is not far when the cars will run 100 per cent on ethanol instead of petrol",cause,MIR_553_10_0,increase green technology,green energy adoption
+"as a result pollution will be reduced, import bill will come down, and ultimately the farmers will be benefitted",effect,MIR_553_10_0,reduce pollution,sustainable environment
+his luxury car hit a road divider,cause,MIR_553_11_0,bad road safety,safety violation
+"Mistry, 54, was killed in a car crash in Maharashtra's Palghar district near Mumbai on September 4",effect,MIR_553_11_0,man killed,accident
+"to increase the production of the future-generation electrified dual-clutch transmissions (eDCT) (pictured, below) for Stellantis hybrid and PHEVs",cause,MIR_654_1_0,increase green technology,Increased demand
+"To advance its electrified model range, the automaker has signed a new agreement with Punch Powertrain",effect,MIR_654_1_0,increase advance technology,innovation
+To advance its electrified model range,cause,MIR_654_1_1,increase advance technology,innovation
+the automaker has signed a new agreement with Punch Powertrain,effect,MIR_654_1_1,increase investment,new supplier
+that the automaker has been using a defeat device to fraudulently pass the jurisdiction’s emissions tests.,cause,MIR_801_0_0,cheating on test,Compliance
+"Prosecutors in Germany, Hungary, and Italy raided the offices of Suzuki this week",effect,MIR_801_0_0,raid check,audit
+"to “counter the use of faulty emission devices in engines, used in cars of a Japanese producer",cause,MIR_801_5_0,raid check,compliance
+"Jeep And Suzuki Caught Cheating EU’s Emission Rules With Grand Cherokee, Vitara, S-CrossThe searches were conducted",effect,MIR_801_5_0,cheating on test,audit
+The devices were allegedly fitted in the Italian-built diesel engines of large numbers of cars,cause,MIR_801_6_0,increase production,safety violation
+giving the impression that the vehicles’ nitrogen oxide emissions were in line with EU regulations,effect,MIR_801_6_0,cheating on test,Fraud
+aimed at mitigating the impact of a fall in output brought on by a global chip shortage,cause,MIR_937_0_0,shortage of supply,supply shortage
+carmaker is implementing a furlough scheme,effect,MIR_937_0_0,decrese production,production loss
+on by a global chip shortage,cause,MIR_937_1_0,shortage of supply,supply shortage
+impact of a fall in output,effect,MIR_937_1_0,decrease in production,production loss
+"The French furlough deal,",cause,MIR_937_2_0,decrease production,supply shortage
+the company to reduce the number of hours worked by staff affected by the chip shortage.,effect,MIR_937_2_0,decrease working hours,production loss
+chip shortage,cause,MIR_937_2_1,shortage of supply,supply shortage
+the company to reduce the number of hours worked by staff affected by the,effect,MIR_937_2_1,decrease working hours,production loss
+there is plenty of work to do.,cause,MIR_937_5_0,high employment,Imbalance
+White collar workers are having to go into partial unemployment,effect,MIR_937_5_0,low employment,unemployment
+the chip shortage,cause,MIR_937_8_0,shortage of supply,supply shortage
+this summer forecast it would produce 1.4 million fewer vehicles this year,effect,MIR_937_8_0,reduce production,production loss
+the merger between PSA and FCA,cause,MIR_937_8_1,increase investment,Business strategy
+it would produce 1.4 million fewer vehicles this year,effect,MIR_937_8_1,reduce production,production loss
+Technogoical advancements such us automated control and advanced systems,cause,MIR_1785_4_0,increase advance technology,Technology improvement
+a major shift among automotive industry towards automotive camless piston engine,effect,MIR_1785_4_0,change in production,innovation
+a major shift among automotive industry towards automotive camless piston engine,cause,MIR_1785_4_1,change in production,innovation
+persist in future augmenting the demand for automotive camless piston engine,effect,MIR_1785_4_1,increase demand,obsolete components
+the rise in usage of advanced emission free features in vehicles,cause,MIR_1785_5_0,increase advance technology,green energy adoption
+Implementation of automotive camless piston engine,effect,MIR_1785_5_0,increase production,innovation
+the use of stronger steel,cause,MIR_2060_8_0,increase advance technology,product improvement
+continue with its Global C platform but will receive structural updates for an improved build quality,effect,MIR_2060_8_0,improve quality,design innovation
+"their growing tech presence, connection to Walmart and broad, diverse talent",cause,MIR_3225_4_0,increase advance technology,Talent
+Entering new locationsWe strategically chose Atlanta and Toronto as our newest tech hubs,effect,MIR_3225_4_0,increase investment,Technology hub
+all in support of keeping local talent on Canadian soil.,cause,MIR_3225_5_0,support local employment,employment
+plans to create several hundred new tech jobs in the next 12 months –,effect,MIR_3225_5_0,increase employment,technology jobs
+Every new hire is an integral part of our Walmart Global Tech team,cause,MIR_3225_9_0,increase employment,Talent hire
+and we’re committed to helping new associates find opportunities for personal and professional growth,effect,MIR_3225_9_0,increase opportunies,Opportunities
+the effective pandemic response and guided by the ASEAN Comprehensive Recovery Framework (ACRF) and its Implementation Plan,cause,MIR_5484_2_0,increase pandemic,policymaking
+"we have emerged safer, stronger, and more resilient as a community",effect,MIR_5484_2_0,improve community,resilience
+ASEAN trade volumes have returned to pre-pandemic levels,cause,MIR_5484_3_0,increase investment,recovery
+and the bloc’s economy is forecast to grow by 4.9% this year and 5.2% next year.,effect,MIR_5484_3_0,improve economy,better economy
+to be better prepared for future shocks,cause,MIR_5484_4_0,better preparation,resilience
+ASEAN needs to take heed of past experiences,effect,MIR_5484_4_0,learn from past,learning
