@@ -7,13 +7,15 @@ import nltk
 from nltk.tokenize import sent_tokenize
 from nlp_tools import join_neighbouring_args, pick_longer_args, combine_causenet_args
 from torch_deps import get_ce_pair_cls
+from pathlib import Path
 
 
 class LogReader(object):
     def __init__(self, log_file_path, csv_file_path, 
                  model, tokenizer, additional_pair_clf=True, 
                  causenet_simplify=False):
-        self.doc_id_start, self.doc_id_end = log_file_path.split("MIR-")[-1].split(".log")[0].split("_")
+        file_name = Path(csv_file_path).stem
+        self.doc_id_start, self.doc_id_end = log_file_path.split(f"{file_name}-")[-1].split(".log")[0].split("_")
         self.doc_id_start, self.doc_id_end = int(self.doc_id_start), int(self.doc_id_end)
         self.segments = {}
         self.open_log_file(log_file_path)

@@ -12,14 +12,15 @@ from pathlib import Path
 def main(csv_file_path, folder):
     # Load Dependencies
     model, tokenizer = get_ce_pair_model()
+    file_name = Path(csv_file_path).stem
 
     # Process
     print('Processing...')
     f_infos = {}
-    file_paths = [os.path.join(folder, f) for f in os.listdir(folder) if os.path.isfile(os.path.join(folder, f))]
+    file_paths = [os.path.join(folder, f) for f in os.listdir(folder) if '.log' in f] #os.path.isfile(os.path.join(folder, f) and 
     # file_paths = [r"D:\79 Mass\outs\MIR\MIR-540_554.log"]
     for log_file_path in tqdm(file_paths):
-        s,e = log_file_path.split("MIR-")[-1].split(".log")[0].split("_")
+        s,e = log_file_path.split(f"{file_name}-")[-1].split(".log")[0].split("_")
         reader = LogReader(
             log_file_path, csv_file_path, 
             model, tokenizer,
@@ -51,8 +52,8 @@ def main(csv_file_path, folder):
     report_intersection(f_infos)
 
     # Store
-    file_name = Path(csv_file_path).stem
-    filehandler = open(os.path.join(r"D:\66 CausalMap\Panasonic-IDS\outs",f"{file_name}_rels.obj"),"wb")
+    # filehandler = open(os.path.join(r"D:\66 CausalMap\Panasonic-IDS\outs",f"{file_name}_rels.obj"),"wb")
+    filehandler = open(os.path.join(folder,f"{file_name}_rels.obj"),"wb")
     pickle.dump(f_infos,filehandler)
     filehandler.close()
 
@@ -60,7 +61,7 @@ def main(csv_file_path, folder):
 if __name__ == "__main__":
     """
     conda activate cre
-    python process_extraction
+    python process_extraction.py
     """
     csv_file_path = r"D:\66 CausalMap\Panasonic-IDS\data\MIR.csv"
     folder = r"D:\79 Mass\outs\MIR"

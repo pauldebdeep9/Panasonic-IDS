@@ -4,6 +4,7 @@ from pathlib import Path
 import pandas as pd
 
 
+# list_of_doc_ids_to_study = [51,78,94,143,328,387,455,553,654,801,937,1785,2060,3225,5484]
 def predictions_to_graph(prediction_file, graph_folder):
     
     file = open(prediction_file,'rb')
@@ -17,14 +18,14 @@ def predictions_to_graph(prediction_file, graph_folder):
     rows = []
     for (cause,effect), evidences in f_infos.items():
         for evidence in evidences:
-            if ('unicausal' in evidence['method']) or ('causenet' in evidence['method']): # add filtering condition
-                rows.append([
-                    cause,
-                    effect,
-                    "f-"+str(evidence['doc_id']),#+"-"+str(evidence['sent_id']),
-                    len(evidence['method']), #support
-                    evidence['cause_span']+' --> '+evidence['effect_span']+'; '+str(evidence['method'])+'; '+str(evidence['text'])
-                ])
+            # if int(evidence['doc_id']) in list_of_doc_ids_to_study: #if ('unicausal' in evidence['method']) or ('causenet' in evidence['method']): # add filtering condition
+            rows.append([
+                cause,
+                effect,
+                "f-"+str(evidence['doc_id']),#+"-"+str(evidence['sent_id']),
+                len(evidence['method']), #support
+                evidence['cause_span']+' --> '+evidence['effect_span']+'; '+str(evidence['method'])+'; '+str(evidence['text'])
+            ])
             
     graph_df = pd.DataFrame(rows, columns=headers)
     # get nodes

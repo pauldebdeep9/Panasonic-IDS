@@ -101,23 +101,29 @@ def cluster_nodes(graph_folder):
     N_TOPICS = 3000 #int(len(data)*2*0.1)
     TOP_N_WORDS = 15
     TOP_N_KEYWORDS = 5
+    LOAD_EMBEDDINGS = True
 
-    # create word embeddings
-    print(f'generating embeddings...')
-    model = SimCSE("princeton-nlp/sup-simcse-bert-base-uncased")
     sentences = list(data['cause_action_rem'])+list(data['effect_action_rem'])
     sentences = [re.sub('[MASK]','',i) for i in sentences]
-    embeddings = model.encode(sentences)
-    print(f"embeddings.shape: {embeddings.shape}")
     emb_file_path = os.path.join(graph_folder,f"embeddings.pkl")
-    filehandler = open(emb_file_path,"wb")
-    pickle.dump(embeddings,filehandler)
-    filehandler.close()
-    print(f"embeddings saved to: {emb_file_path}")
-
+    if LOAD_EMBEDDINGS:
+        filehandler = open(emb_file_path,"rb")
+        embeddings = pickle.load(filehandler)
+        filehandler.close()
+        print(f"embeddings loaded from: {emb_file_path}")
+    else:
+        # create word embeddings
+        print(f'generating embeddings...')
+        model = SimCSE("princeton-nlp/sup-simcse-bert-base-uncased")
+        embeddings = model.encode(sentences)
+        print(f"embeddings.shape: {embeddings.shape}")
+        filehandler = open(emb_file_path,"wb")
+        pickle.dump(embeddings,filehandler)
+        filehandler.close()
+        print(f"embeddings saved to: {emb_file_path}")
+    
     print(f'clustering...')
     print(f"N_TOPICS: {N_TOPICS}")
-    # TO DO: TRY PCA on Notebook to see if any correlations
     # perform clustering
     kmeans = KMeans(N_TOPICS)
     kmeans_output = kmeans.fit(embeddings)
@@ -199,7 +205,7 @@ def cluster_nodes(graph_folder):
             str(int(row.effect_topic))+'>>'+topic2keywords[int(row.effect_topic)],
             str(row.source),
             int(row['support']),
-            str(row.cause)+' --> '+ str(row.effect) + ';' + str(row.evidence)
+            str(row.cause_action_rem)+' --> '+ str(row.effect_action_rem) + ';' + str(row.evidence)
         ])
     graph_df = pd.DataFrame(rows, columns=headers)
     # get nodes

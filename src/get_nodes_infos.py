@@ -41,9 +41,9 @@ def get_nodes_infos(graph_folder):
 
     batch_size = 200
     n_batches = (len(data)//batch_size)+1
-    continue_from = 58#None
+    continue_from = None
     save_file_name = os.path.join(graph_folder,f"nodes_extracted_infos.pkl")
-    
+
     if continue_from is None:
         final = pd.DataFrame()
         loop = range(n_batches)
@@ -105,6 +105,7 @@ def parse(data):
         effect_template = copy(template)
         for (word,ner) in tagged2:
             if ner!='O':
+                word = word.lower()
                 pattern = ''.join(["\\"+str(c)+whitespace if c in specials else str(c)+whitespace for c in word])
                 pattern = pattern[:-3]
 
