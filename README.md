@@ -1,5 +1,8 @@
 # Steps
 
+#### Set up Environment
+conda env create -f cre_environment.yml
+
 #### 1. Clean Data
 http://localhost:8888/notebooks/66%20CausalMap/Panasonic-IDS/notebooks/EDA.ipynb
 * De-duplication
