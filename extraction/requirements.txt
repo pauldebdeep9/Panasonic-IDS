@@ -1,0 +1,5 @@
+conda install pandas numpy
+conda install pytorch pytorch-cuda=11.7 -c pytorch -c nvidia
+conda install transformers -c huggingface
+conda install -c anaconda networkx
+pip install stanza
