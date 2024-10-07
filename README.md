@@ -12,7 +12,6 @@ outputs = model.generate(inputs, max_length=50, do_sample=True)
 print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 
 
-
 # Steps
 
 #### Set up Environment
