@@ -13,13 +13,6 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 
 
 
-
-
-
-
-
-
-
 # Steps
 
 #### Set up Environment
